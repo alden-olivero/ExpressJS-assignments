@@ -9,14 +9,14 @@ POST http://localhost:8000/api/v1/weather/
 
 ## showRainDetails
 GET http://localhost:8000/api/v1/weather/rain
-![alt text](images/rain details.png)
+![alt text](<images/rain details.png>)
 
 ## showDetailOfSpecificCity
 GET http://localhost:8000/api/v1/weather/Delhi
 ![alt text](images/specific.png)
 ## changeRainDetails 
 PUT http://localhost:8000/api/v1/weather/Delhi
-![alt text](images/update rain.png)
+![alt text](<images/update rain.png>)
 
 ## removeCity
 DELETE http://localhost:8000/api/v1/weather/Agra
