@@ -1,5 +1,6 @@
 # ExpressJS-assignments
 
+Use: npm start
 ## showAllDetails
 GET http://localhost:8000/api/v1/weather/
 ![alt text](images/image.png)
