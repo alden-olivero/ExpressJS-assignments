@@ -15,15 +15,17 @@ exports.showAllDetails =(req,res)=>{
 
 //show cities with rainy weather 
 exports.showRainDetails = (req, res) => {
-  
-  const filteredcities = cities.filter(city => city.weather.some(weather => weather.main === "Rain")).map(city => city.city.name);
-  
+
+  const filteredCities = cities
+    .filter(city => city.weather && city.weather.some(weather => weather.main === "Rain"))
+    .map(city => city.city.name);
+
   res.status(200).json({
-      status: "Success",
-      results: filteredcities.length,
-      data: {
-        citiesWithRain:filteredcities
-      }
+    status: "Success",
+    results: filteredCities.length,
+    data: {
+      citiesWithRain: filteredCities
+    }
   });
 }; 
 
