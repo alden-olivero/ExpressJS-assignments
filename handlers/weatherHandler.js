@@ -12,10 +12,11 @@ exports.showAllDetails =(req,res)=>{
     }
   });
 };
+
+//show cities with rainy weather 
 exports.showRainDetails = (req, res) => {
   
   const filteredcities = cities.filter(city => city.weather.some(weather => weather.main === "Rain")).map(city => city.city.name);
-  
   
   res.status(200).json({
       status: "Success",
@@ -26,18 +27,14 @@ exports.showRainDetails = (req, res) => {
   });
 }; 
 
-
-
 exports.changeRainDetails = (req, res) => {
   const cityName = req.params.cityName.toLowerCase();
   
   const city = cities.find(c => c.city && c.city.name && c.city.name.toLowerCase() === cityName);
-
-
   if (city) {
       city.weather.forEach(weather => (weather.main = "No Rain"));
       fs.writeFileSync(`${__dirname}/../data/weather.json`, JSON.stringify(cities, null, 2));
-      res.json({ message: `Rain details updated to 'No Rain' for city ${cityName}` });
+      res.json({ message:`Rain details updated to 'No Rain' for city ${cityName}` });
   } else {
       res.status(404).json({ message: "City not found" });
   }
@@ -76,15 +73,11 @@ exports.addCityWeather=(req,res)=>{
 };
 exports.removeCity = (req, res) => {
   const cityName = req.params.cityName.toLowerCase();
-  
-  // Find the index safely, ensuring city and city.name are defined
   const cityIndex = cities.findIndex(city => city && city.city && city.city.name && city.city.name.toLowerCase() === cityName);
 
   if (cityIndex === -1) {
       return res.status(404).json({ message: 'City not found' });
   }
-
-  // Remove the city from the array if it exists
   const removedCity = cities.splice(cityIndex, 1);
 
   fs.writeFileSync(`${__dirname}/../data/weather.json`, JSON.stringify(cities, null, 2));
